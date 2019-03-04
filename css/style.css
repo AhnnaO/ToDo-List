@@ -1,0 +1,22 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: cornsilk;
+}
+
+h1, h2, h3{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 4rem;
+    color: purple;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+li{
+    list-style: none;
+}
+
+.list-group-flush{
+    margin-top: 20px;
+}
