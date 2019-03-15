@@ -9,38 +9,39 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
+<body  onload="printNewList()">
     <main class="container">
-        <div class="row">
-            <h1 class="text-center col-12">My To Do List</h1>
-            
-            <button class="btn btn-info btn-lg text-center col-12" onclick="everydayList()">
-            View Daily List
-            </button>
-        </div> 
-        <div class="row">   
-            <ul id="dailyList" class="list-group-flush col-6"></ul>    
-        </div>
-        <!--<button class="btn btn-info btn-lg text-center col-6" >
-                Move to Completed List
-                </button>
-                -->
-        <div class="row">
-            <h2 class="text-center col-12">Add to Your List</h2>
-            <input type="text" id="newList">
-            <button type="submit" onclick="addList()">Add</button>
-            <ul id="printNewItem" col-6></ul>
-        </div>
-
-        <div class="row">
-                <h3 class="text-center col-12">Completed List</h1>
-                
+        
+            <div class="row">
+                <h1 class="text-center col-12">My To Do List</h1>
             </div> 
-            <div class="row">   
-                <ul id="finishedList" class="list-group-flush"></ul>
-                
+        
+            <div class="row"> 
+                <div class="listBox col-8 mx-auto">  
+                    <ul id="dailyList" class="list-group-flush "></ul>
+                </div>    
+            </div>
+        </div>
+            <div class="row">
+                <h2 class="text-center col-12">Add to Your List</h2>
             </div>
 
+            <div class="row">
+                <div class="col-12 text-center">
+                    <input type="text" id="newList">
+                    <button type="submit" onclick="addList()">Add</button>
+                </div>
+        </div>    
+
+        <div class="row">
+                <h2 class="text-center col-12">Completed List</h1>    
+        </div>
+
+        <div class="row">
+            <div class="listBox second col-8 mx-auto">   
+                <ul id="finishedList" class="list-group-flush col-10 mx-auto"></ul>                
+            </div>
+        </div>
     </main>
 
 

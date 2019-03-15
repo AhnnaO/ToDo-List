@@ -1,129 +1,96 @@
+//my hard coded items
+var task1 = {
+    todo: 'Work out',
+    checked: false
+};
+
+var task2 = {
+    todo: 'Drop off the kids',
+    checked: false
+};
+
+var task3 = {
+    todo: 'Pack a lunch',
+    checked: false
+};
+//stored in a list as objects    
 var myList = [
-    'Work out',
-    'Drop off the kids',
-    'Pack a lunch'
+    task1,
+    task2,
+    task3
 ];
 
+function retrieveList() {
 
-var inputClass = document.getElementsByClassName("form-check-input");
-//var finishedTasks = [''];
-
-
-function everydayList() {
-    var entireList = "";
-    var liOpenTag = "<li class='list-group-item'>";
-    var labelTag = "<label class='form-check-label' for='defaultCheck";
-    var inputTag = "'><input class='form-check-input' onclick='moveFromList()' type='checkbox' value='' id='defaultCheck";
-    var CloseTag = "</input></li>";
-
-    for (i = 0; i < myList.length; i++) {
-        entireList += liOpenTag + labelTag + [i] + inputTag + [i] + "'>" + myList[i] + CloseTag;
+    var storedValues = localStorage.getItem("text");
+    if (storedValues != null) {
+        myList = JSON.parse(storedValues);
     }
-    document.getElementById("dailyList").innerHTML = entireList;
+    return myList;
 }
+
 
 function addList() {
-    var newItem = "";
-    var liOpenTag = "<li class='list-group-item'>";
-    var labelTag = "<label class='form-check-label' for='defaultCheck";
-    var inputTag = "'><input class='form-check-input' onclick='moveFromList()' type='checkbox' value='' id='defaultCheck";
-    var CloseTag = "</input></li>";
 
-    for (i = 0; i < myList.length; i++) {
-        newItem += liOpenTag + labelTag + [i] + inputTag + [i] + "'>" + retrievedList + CloseTag;
-    }
-    console.log(liOpenTag);
-    console.log(labelTag);
-    console.log(inputTag);
-    console.log(newItem);
     var x = document.getElementById("newList").value;
-    myList.push(x);
-    localStorage.setItem("text", x);
-    var retrievedList = localStorage.getItem("text");        
-    console.log(retrievedList);
-    //everydayList();
+    myList = retrieveList();
+    myList.push({
+        todo: x,
+        checked: false
+    });
 
-    document.getElementById("dailyList").innerHTML = newItem;
+    localStorage.setItem("text", JSON.stringify(myList));
+
+    printNewList();
     document.getElementById("newList").value = "";
+
 }
 
-function moveFromList() {
+function printNewList() {
+
+    //print items todo    
+    var newItem = "";
+    var allItems = retrieveList();
+
+    for (i = 0; i < allItems.length; i++) {
+        if(!allItems[i].checked){
+            var liOpenTag = "<li class='list-group-item col-12' >";
+            var labelTag = "<label class='form-check-label' for='defaultCheck";
+            var CloseTag = "</input></li>";
+            var inputTag = "'><input class='form-check-input' onclick='moveFromList(" + i + ")' type='checkbox' id='defaultCheck";
+
+            newItem += liOpenTag + labelTag + [i] + inputTag + [i] + "'>" + allItems[i].todo + CloseTag;
+        }
+    }
+
+    document.getElementById("dailyList").innerHTML = newItem;
+
+    //print completed items
     var checkedBoxes = "";
-    var liOpenTag = "<li class='list-group-item'>";
-    var CloseTag = "</li>";
-
-    for (i = 0; i < inputClass.length; i++) {
- 
-        localStorage.setItem(document.getElementsByClassName("form-check-input")[i].getAttribute('id'), inputClass[i].checked);
-        var finished = localStorage.getItem(document.getElementsByClassName("form-check-input")[i].getAttribute('id'));
-        console.log(localStorage.getItem(document.getElementsByClassName("form-check-input")[i].getAttribute('id')));
-        //console.log(myList[i]);
-            //finished.style.textDecoration = "line-through";
-            
-               
-               //if(finished === true){
-               checkedBoxes += liOpenTag + finished + CloseTag; 
-               //document.getElementById("finishedList").innerHTML = "<li>" + myList + "</li>";
-             //console.log(myList);
-            document.getElementById("finishedList").innerHTML = checkedBoxes;
-    //}
- }
-} 
-// function moveFromList() {
-//     var checkedBoxes = "";
-//     var liOpenTag = "<li class='list-group-item'>";
-//     var labelTag = "<label class='form-check-label' for='defaultCheck";
-//     var inputTag = "'><input class='form-check-input' onclick='moveFromList()' type='checkbox' value='' id='defaultCheck";
-//     var CloseTag = "</input></li>";
-
-//     for (i = 0; i < inputClass.length; i++) {
-
-//         localStorage.setItem(document.getElementsByClassName("form-check-input")[i].getAttribute('id'), inputClass[i].checked);
-//         var finished = localStorage.getItem(document.getElementsByClassName("form-check-input")[i].getAttribute('id'));
-//         for (i = 0; i < finished.length; i++) {
-//             checkedBoxes += liOpenTag + labelTag + [i] + inputTag + [i] + "'>" + myList[i] + CloseTag;
-//         }
-//         document.getElementById("finishedList").innerHTML = checkedBoxes;
-//     }
-// }    
-//         //if(true) {
-//             //finishedTasks.push(finished);
-//             //everydayList();
-//           //checkedBoxes += liOpenTag + labelTag + [i] + inputTag + [i] + "'>" + finishedList[i] + CloseTag;
-//             //finished.style.textDecoration = "line-through";
-//             //for(j = 0; j < finishedTasks.length; j++){
-//                 //document.getElementById("finishedList").innerHTML = entireList + finishedTasks;
-//                 document.getElementById("finishedList").innerHTML = finished;
-//             //}
-//         }
-
-
-//     }
-// }    
-
     
+    var allItems = retrieveList();
 
+    for (i = 0; i < allItems.length; i++) {
+        if(allItems[i].checked){
+            var liOpenTag = "<li class='list-group-item col-12' >";
+            var labelTag = "<label class='form-check-label' checked for='defaultCheck";
+            var inputTag = "'><input class='form-check-input' onclick='moveFromList(" + i + ")' type='checkbox' id='defaultCheck";
+            var CloseTag = "</li>";
+            
+            checkedBoxes += liOpenTag + labelTag + [i] + inputTag + [i] + "'>" + allItems[i].todo + CloseTag;
+        }
+        localStorage.setItem("text", JSON.stringify(myList));
+    }
 
-    // Save List
-//  JSON.stringify() change list to text & JSON.parse() to change teext to list
+    document.getElementById("finishedList").innerHTML = checkedBoxes;
 
+    }
 
-// var retrievedList = localStorage.getItem(“listFromInput”);
-// var itemFromStorage = JSON.parse(retrievedList);
-// var globalList = itemFromStorage;
+function moveFromList(todoId) {
 
-// function gettingAndSettingLocalStorage(){
-//  globalList.push(document.getElementById(“item”).value);
+    myList[todoId].checked = !myList[todoId].checked;
+    localStorage.setItem("text", JSON.stringify(myList));
 
-//  var listFromInput = localStorage.setItem(“listFromInput”, JSON.stringify(globalList));
-
-//  // retrieve stored data (JSON stringified) and convert
-
-//  var retrievedList = localStorage.getItem(“listFromInput”);
-//  var itemFromStorage = JSON.parse(retrievedList);
-
-//  var singleItem = “”;
-//    for(let i = 0; i < itemFromStorage.length; i++){
-//      singleItem += “<li>” + itemFromStorage[i] + “</li>“;
-//    }
-//  document.getElementById(“result”).innerHTML = singleItem;
+    printNewList();
+    
+}

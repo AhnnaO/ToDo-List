@@ -1,22 +1,42 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: cornsilk;
+    background-image: url(../images/aperture-vintage-339839-unsplash.jpg);
+    min-height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: whitesmoke;
 }
 
 h1, h2, h3{
     font-family: 'Times New Roman', Times, serif;
     font-size: 4rem;
-    color: purple;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    color: whitesmoke;
+    margin: 20px;
+    padding: 20px;
 }
 
 li{
     list-style: none;
+    padding-left: 20px;
 }
 
 .list-group-flush{
     margin-top: 20px;
+}
+
+.checked{
+    text-decoration-line: line-through;
+    color: darkgray;
+}
+
+.listBox{
+    border: 4px solid aquamarine;
+    background-color: white;
+    width: 100%;
+}
+
+.second{
+    margin-bottom: 50px;
 }
